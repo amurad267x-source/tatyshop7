@@ -4,13 +4,23 @@
   <meta charset="UTF-8" />
   <title>TaTyshop</title>
   <link rel="stylesheet" href="style.css" />
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
 </head>
 <body>
 
 <header class="header">
   <div class="logo">TaTyshop</div>
   <div class="actions">
-    <button class="btn">Войти</button>
+    <div id="g_id_onload"
+     data-client_id="695304505702-0lb1dmp7hjoef5kngt60qc64l2jf97jt.apps.googleusercontent.com"
+     data-callback="handleCredentialResponse">
+</div>
+
+<div class="g_id_signin"
+     data-type="standard"
+     data-theme="filled_black"
+     data-size="large">
+</div>
     <a href="cart.html"><button class="btn">Корзина</button></a>
   </div>
 </header>
@@ -24,3 +34,4 @@
 </body>
 
 </html>
+
