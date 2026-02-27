@@ -34,5 +34,24 @@ async function loadProducts() {
     console.error("Ошибка загрузки товаров:", err);
   }
 }
+async function handleCredentialResponse(response) {
+  const res = await fetch("https://backend.tatyshop.workers.dev/auth/google", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      credential: response.credential
+    })
+  });
+
+  const data = await res.json();
+  console.log("Auth result:", data);
+
+  if (data.success) {
+    alert("Вы вошли как " + data.email);
+  }
+}
 
 loadProducts();
+
