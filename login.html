@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <title>Вход — TaTyshop</title>
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+
+  <style>
+    body {
+      margin: 0;
+      background: #0f0f0f;
+      color: white;
+      font-family: Arial;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .auth-box {
+      background: #1a1a1a;
+      padding: 40px;
+      border-radius: 8px;
+      text-align: center;
+      width: 350px;
+    }
+
+    h1 {
+      margin-bottom: 30px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="auth-box">
+    <h1>Вход в TaTyshop</h1>
+
+    <div id="g_id_onload"
+         data-client_id="695304505702-0lb1dmp7hjoef5kngt60qc64l2jf97jt.apps.googleusercontent.com"
+         data-callback="handleCredentialResponse">
+    </div>
+
+    <div class="g_id_signin"
+         data-type="standard"
+         data-theme="filled_black"
+         data-size="large">
+    </div>
+
+  </div>
+
+  <script>
+    async function handleCredentialResponse(response) {
+
+      const res = await fetch("https://backend.tatyshop.workers.dev/auth/google", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          credential: response.credential
+        })
+      });
+
+      const data = await res.json();
+      console.log(data);
+
+      if (data.success) {
+        alert("Вход успешен: " + data.email);
+        window.location.href = "/";
+      } else {
+        alert("Ошибка входа");
+      }
+    }
+  </script>
+
+</body>
+</html>
